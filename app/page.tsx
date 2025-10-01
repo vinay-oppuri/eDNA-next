@@ -66,7 +66,7 @@ export default function HomePage() {
               <Link href="#about">
                 <Button variant="ghost">About</Button>
               </Link>
-              <Link href="/login">
+              <Link href="/dashboard/login">
                 <Button>Get Started</Button>
               </Link>
               <ThemeToggle />
