@@ -1,102 +1,228 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Play,
+  Users,
+  Database,
+  Zap,
+  Globe,
+  Microscope,
+  ArrowRight,
+  CheckCircle,
+  Dna,
+} from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
+
+const features = [
+  {
+    icon: Database,
+    title: 'Comprehensive Analysis',
+    description:
+      'Upload DNA datasets or individual queries for deep analysis through our bioinformatics pipeline',
+  },
+  {
+    icon: Zap,
+    title: 'Real-time Processing',
+    description:
+      'Track pipeline progress with visual indicators and get instant results as analysis completes',
+  },
+  {
+    icon: Globe,
+    title: 'Interactive Dashboards',
+    description:
+      'Explore results through interactive visualizations, cluster browsers, and taxonomic breakdowns',
+  },
+  {
+    icon: Microscope,
+    title: 'Scientist Review',
+    description:
+      'Human-in-the-loop validation system for novel discoveries with integrated review workflows',
+  },
+];
+
+const useCases = [
+  'Biodiversity assessment in unexplored marine environments',
+  'Novel species discovery through eDNA clustering',
+  'Taxonomic classification of unknown sequences',
+  'Marine ecosystem monitoring and conservation',
+];
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2">
+              <Dna className="h-8 w-8 text-blue-600" />
+              <span className="text-2xl font-bold text-primary">EDeepNA</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="#about">
+                <Button variant="ghost">About</Button>
+              </Link>
+              <Link href="/login">
+                <Button>Get Started</Button>
+              </Link>
+              <ThemeToggle />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <Badge variant="outline" className="mb-6">
+            Deep-Sea eDNA Analysis Platform
+          </Badge>
+          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+            Discover Marine
+            <span className="block text-blue-600">Biodiversity</span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Advanced bioinformatics platform for environmental DNA analysis,
+            enabling marine biologists to uncover novel species and understand
+            deep-sea ecosystems through cutting-edge computational tools.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/login">
+              <Button size="lg" className="min-w-40">
+                <Users className="mr-2 h-5 w-5" />
+                Get Started
+              </Button>
+            </Link>
+            <Button size="lg" variant="outline" className="min-w-40">
+              <Play className="mr-2 h-5 w-5" />
+              Watch Demo
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Advanced Analysis Capabilities
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive tools designed specifically for marine eDNA research
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature) => (
+              <Card key={feature.title} className="text-center">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <feature.icon className="h-6 w-6 text-accent-foreground" />
+                  </div>
+                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Revolutionizing Marine Biology Research
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                EDeepNA combines state-of-the-art bioinformatics algorithms with
+                intuitive interfaces to help marine biologists analyze environmental
+                DNA samples from the deep sea. Our platform enables the discovery
+                of novel species and provides insights into previously unexplored
+                marine ecosystems.
+              </p>
+
+              <div className="space-y-3 mb-8">
+                {useCases.map((useCase) => (
+                  <div key={useCase} className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    <span className="text-muted-foreground">{useCase}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="/login">
+                <Button size="lg">
+                  Start Analysis
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+
+            <div className="relative">
+              <Card className="p-6 shadow-2xl">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Analysis Progress</span>
+                    <Badge variant="secondary">Running</Badge>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-sm">Quality Control</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-sm">Sequence Alignment</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="h-4 w-4 bg-blue-500 rounded-full animate-pulse" />
+                      <span className="text-sm">Clustering Analysis</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="h-4 w-4 bg-muted rounded-full" />
+                      <span className="text-sm text-muted-foreground">
+                        Taxonomic Classification
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t">
+                    <div className="text-xs text-muted-foreground mb-2">Novel clusters found</div>
+                    <div className="text-2xl font-bold text-blue-600">267</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-card border-t py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Dna className="h-8 w-8 text-blue-400" />
+              <span className="text-2xl font-bold">EDeepNA</span>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              Advancing marine biodiversity research through environmental DNA analysis
+            </p>
+            <p className="text-sm text-muted-foreground">
+              © 2024 EDeepNA Project. All rights reserved. | Restricted to verified scientists only.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
