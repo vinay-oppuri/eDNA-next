@@ -16,6 +16,7 @@ import {
   Legend
 } from 'recharts';
 import { TrendingUp, BarChart2, Compass, Target } from 'lucide-react';
+import React from 'react';
 
 // --- MOCK DATA ---
 const trendData = [
@@ -68,11 +69,9 @@ import type { TooltipProps } from 'recharts';
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-gray-800/80 backdrop-blur-sm text-white p-3 rounded-lg border border-gray-700 shadow-lg">
+      <div className="bg-card/80 backdrop-blur-sm text-white p-3 rounded-lg border-border shadow-lg">
         <p className="font-bold text-base">{label}</p>
         {payload.map((pld, index) => {
-          // pld is of type TooltipProps<number, string>["payload"][number]
-          // But to avoid 'any', we can type it as Record<string, unknown> and check fields
           if (
             typeof pld === 'object' &&
             pld !== null &&
@@ -97,64 +96,64 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
 
 export function GlobalOverview() {
   return (
-    <div className="space-y-8 bg-gray-900 text-white p-8 rounded-2xl">
+    <div className="space-y-8 p-4 md:p-8 rounded-2xl">
         <div className="flex items-center justify-between">
             <div>
-                <h1 className="text-4xl font-bold">Global Overview</h1>
-                <p className="text-muted-foreground text-lg">Comprehensive analysis across all datasets</p>
+                <h1 className="text-3xl md:text-4xl font-bold">Global Overview</h1>
+                <p className="text-muted-foreground text-md md:text-lg">Comprehensive analysis across all datasets</p>
             </div>
         </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         {/* Trend of Novel Clusters Over Time */}
-        <Card className="bg-gray-800 border-gray-700 shadow-2xl">
+        <Card className="shadow-2xl bg-card/60 backdrop-blur-sm border border-border">
           <CardHeader>
-            <CardTitle className="flex items-center text-xl"><TrendingUp className="mr-2" />Trend of Novel Clusters Over Time</CardTitle>
+            <CardTitle className="flex items-center text-xl font-semibold"> Trend of Novel Clusters</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={trendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <XAxis dataKey="name" stroke="#9ca3af" />
-                <YAxis stroke="#9ca3af" />
-                <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#8884d8', strokeWidth: 1, strokeDasharray: '3 3' }} />
-                <Area type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} fill="url(#colorValue)" />
+                <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} />
+                <YAxis stroke="var(--muted-foreground)" fontSize={12} />
+                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--chart-1)', strokeWidth: 1, strokeDasharray: '3 3' }} />
+                <Area type="monotone" dataKey="value" stroke="var(--chart-1)" strokeWidth={2} fill="url(#colorValue)" />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
         {/* Taxonomic Coverage */}
-        <Card className="bg-gray-800 border-gray-700 shadow-2xl">
+        <Card className="shadow-2xl bg-card/60 backdrop-blur-sm border border-border">
           <CardHeader>
-            <CardTitle className="flex items-center text-xl"><BarChart2 className="mr-2" />Taxonomic Coverage</CardTitle>
+            <CardTitle className="flex items-center text-xl font-semibold">Taxonomic Coverage</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={taxonomicData} layout="vertical" margin={{ top: 10, right: 30, left: 10, bottom: 20 }}>
+                <BarChart data={taxonomicData} layout="vertical" margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
                     <XAxis type="number" hide />
-                    <YAxis type="category" dataKey="name" stroke="#9ca3af" width={60} tickLine={false} axisLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(136, 132, 216, 0.1)' }} />
-                    <Legend wrapperStyle={{ color: 'white', paddingBottom: '20px' }} align="center" />
-                    <Bar dataKey="familyA" stackId="a" fill="#3b82f6" name="familyA" />
-                    <Bar dataKey="familyB" stackId="a" fill="#10b981" name="familyB" />
-                    <Bar dataKey="familyC" stackId="a" fill="#f97316" name="familyC" />
-                    <Bar dataKey="familyD" stackId="a" fill="#a855f7" name="familyD" />
-                    <Bar dataKey="other" stackId="a" fill="#64748b" name="Other" />
+                    <YAxis type="category" dataKey="name" stroke="var(--muted-foreground)" width={60} tickLine={false} axisLine={false} fontSize={12} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(var(--primary-foreground-rgb), 0.1)' }} />
+                    <Legend wrapperStyle={{ paddingBottom: '20px' }} align="center" />
+                    <Bar dataKey="familyA" stackId="a" fill="var(--chart-2)" name="familyA" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="familyB" stackId="a" fill="var(--chart-3)" name="familyB" radius={[0, 4, 4, 0]}/>
+                    <Bar dataKey="familyC" stackId="a" fill="var(--chart-4)" name="familyC" radius={[0, 4, 4, 0]}/>
+                    <Bar dataKey="familyD" stackId="a" fill="var(--chart-5)" name="familyD" radius={[0, 4, 4, 0]}/>
+                    <Bar dataKey="other" stackId="a" fill="var(--muted)" name="Other" radius={[0, 4, 4, 0]}/>
                 </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
         {/* Novel vs. Known Ratio */}
-        <Card className="bg-gray-800 border-gray-700 shadow-2xl">
+        <Card className="shadow-2xl bg-card/60 backdrop-blur-sm border border-border">
           <CardHeader>
-            <CardTitle className="flex items-center text-xl"><Compass className="mr-2" />Novel vs. Known Ratio</CardTitle>
+            <CardTitle className="flex items-center text-xl font-semibold">Novel vs. Known Ratio</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -165,21 +164,18 @@ export function GlobalOverview() {
                   cy="50%"
                   innerRadius={80}
                   outerRadius={120}
-                  fill="#8884d8"
+                  fill="var(--chart-1)"
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  <Cell key={`cell-0`} fill="#0ea5e9" />
-                  <Cell key={`cell-1`} fill="#334155" />
+                  <Cell key={`cell-0`} fill="var(--chart-2)" />
+                  <Cell key={`cell-1`} fill="var(--muted)" />
                 </Pie>
                 <Tooltip content={<CustomTooltip />} />
-                <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central" fill="#9ca3af" className="text-lg">
-                  Known
-                </text>
-                 <text x="50%" y="40%" textAnchor="middle" dominantBaseline="central" fill="#0ea5e9" className="text-3xl font-bold">
+                <text x="50%" y="45%" textAnchor="middle" dominantBaseline="central" fill="var(--chart-2)" className="text-4xl font-bold">
                   22%
                 </text>
-                 <text x="50%" y="50%" dy={20} textAnchor="middle" fill="#0ea5e9">
+                 <text x="50%" y="55%" dy={5} textAnchor="middle" fill="var(--muted-foreground)">
                   Novel
                 </text>
               </PieChart>
@@ -188,47 +184,59 @@ export function GlobalOverview() {
         </Card>
 
         {/* Top 10 Largest Clusters */}
-        <Card className="bg-gray-800 border-gray-700 shadow-2xl">
+        <Card className="shadow-2xl bg-card/60 backdrop-blur-sm border border-border">
             <CardHeader>
-                <CardTitle className="flex items-center text-xl"><Target className="mr-2"/>Top 10 Largest Clusters</CardTitle>
+                <CardTitle className="flex items-center text-xl font-semibold">Top 10 Largest Clusters</CardTitle>
             </CardHeader>
             <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={topClustersData} margin={{ top: 20, right: 30, left: -10, bottom: 5 }}>
-                        <XAxis dataKey="name" stroke="#9ca3af" />
-                        <YAxis stroke="#9ca3af" />
-                        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(136, 132, 216, 0.1)' }} />
-                        <Bar dataKey="value" name="Size" fill="#0ea5e9" radius={[4, 4, 0, 0]} />
+                         <defs>
+                            <linearGradient id="colorCluster" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor="var(--chart-5)" stopOpacity={0.2}/>
+                            </linearGradient>
+                        </defs>
+                        <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} />
+                        <YAxis stroke="var(--muted-foreground)" fontSize={12}/>
+                        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(var(--primary-foreground-rgb), 0.1)' }} />
+                        <Bar dataKey="value" name="Size" fill="url(#colorCluster)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
             </CardContent>
         </Card>
 
         {/* Dataset Comparison (Shared Clusters) */}
-        <Card className="lg:col-span-2 bg-gray-800 border-gray-700 shadow-2xl">
+        <Card className="lg:col-span-2 shadow-2xl bg-card/60 backdrop-blur-sm border border-border">
             <CardHeader>
-                <CardTitle className="flex items-center text-xl">Dataset Comparison (Shared Clusters)</CardTitle>
+                <CardTitle className="flex items-center text-xl font-semibold">Dataset Comparison (Shared Clusters)</CardTitle>
             </CardHeader>
-            <CardContent className="flex justify-center items-center">
-                <div className="grid grid-cols-6 gap-1 p-4">
-                    <div></div>
-                    {datasetComparisonData.labels.map(label => <div key={label} className="text-center font-bold text-sm text-gray-400">{label}</div>)}
-                    {datasetComparisonData.matrix.map((row, i) => (
-                        <div key={i}>
-                            <div className="text-center font-bold text-sm text-gray-400">{datasetComparisonData.labels[i]}</div>
+            <CardContent className="flex justify-center items-center p-4">
+                <div className="w-full max-w-lg grid grid-cols-[auto_repeat(5,minmax(0,1fr))] gap-2 aspect-square">
+                    <div />
+                    {datasetComparisonData.labels.map(label => (
+                        <div key={label} className="flex items-center justify-center font-bold text-sm text-muted-foreground p-1">{label}</div>
+                    ))}
+
+                    {datasetComparisonData.matrix.flatMap((row, i) => (
+                        <React.Fragment key={i}>
+                            <div className="flex items-center justify-center font-bold text-sm text-muted-foreground p-1">{datasetComparisonData.labels[i]}</div>
                             {row.map((value, j) => {
-                                let bgColor = 'bg-gray-700';
-                                if (value > 100) bgColor = 'bg-cyan-500';
-                                else if (value > 50) bgColor = 'bg-cyan-600';
-                                else if (value > 20) bgColor = 'bg-cyan-700';
-                                else if (value > 0) bgColor = 'bg-cyan-800';
+                                const intensity = value > 0 ? Math.min(Math.floor(value / 20), 4) : 0;
+                                const colorClasses = ['bg-muted/20', 'bg-accent/40', 'bg-accent/60', 'bg-secondary/80', 'bg-primary/90'];
+								const bgColor = i === j ? 'bg-card' : colorClasses[intensity];
+
                                 return (
-                                <div key={j} className={`w-20 h-20 flex items-center justify-center rounded-lg text-white font-bold text-lg ${bgColor} ${i === j ? 'opacity-50' : ''}`}>
+                                <div
+                                    key={j}
+                                    className={`aspect-square flex items-center justify-center rounded-md text-white font-bold text-xs md:text-sm transition-transform duration-200 ${bgColor} ${i === j ? 'opacity-50' : 'hover:scale-105'}`}
+                                    title={`Shared: ${value}`}
+                                >
                                     {i !== j ? value : ''}
                                 </div>
                                 )
                             })}
-                        </div>
+                        </React.Fragment>
                     ))}
                 </div>
             </CardContent>
