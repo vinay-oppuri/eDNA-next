@@ -69,7 +69,7 @@ import type { TooltipProps } from 'recharts';
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-card/80 backdrop-blur-sm text-white p-3 rounded-lg border-border shadow-lg">
+      <div className="bg-card/80 backdrop-blur-sm text-card-foreground p-3 rounded-lg border-border shadow-lg">
         <p className="font-bold text-base">{label}</p>
         {payload.map((pld, index) => {
           if (
@@ -229,7 +229,7 @@ export function GlobalOverview() {
                                 return (
                                 <div
                                     key={j}
-                                    className={`aspect-square flex items-center justify-center rounded-md text-white font-bold text-xs md:text-sm transition-transform duration-200 ${bgColor} ${i === j ? 'opacity-50' : 'hover:scale-105'}`}
+                                    className={`aspect-square flex items-center justify-center rounded-md text-primary-foreground font-bold text-xs md:text-sm transition-transform duration-200 ${bgColor} ${i === j ? 'opacity-50' : 'hover:scale-105'}`}
                                     title={`Shared: ${value}`}
                                 >
                                     {i !== j ? value : ''}
