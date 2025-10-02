@@ -245,7 +245,7 @@ export default function HomePage() {
               Advancing marine biodiversity research through environmental DNA analysis
             </p>
             <p className="text-xs text-muted-foreground">
-              © 2024 EDeepNA Project. All rights reserved. | Restricted to verified scientists only.
+              © 2025 EDeepNA Project. All rights reserved. | Restricted to verified scientists only.
             </p>
           </div>
         </div>

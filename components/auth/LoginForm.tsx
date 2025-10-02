@@ -27,7 +27,7 @@ export function LoginForm() {
 
     try {
       // TODO: Replace with API call or NextAuth signIn()
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       router.replace('/dashboard');
     } finally {
       setLoading(false);

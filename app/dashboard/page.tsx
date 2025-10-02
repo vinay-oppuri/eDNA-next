@@ -13,6 +13,7 @@ import { Chatbot } from '@/components/dashboard/Chatbot';
 import { UploadDialog } from '@/components/upload/UploadDialog';
 import { Datasets } from '@/components/dashboard/Datasets';
 import { Dataset, View } from '@/types/types';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const mockDatasets: Dataset[] = [
   { id: 'ds1', name: 'DeepSea_Pacific_2024', createdAt: new Date('2024-01-15') },
@@ -82,7 +83,7 @@ export default function DashboardPage() {
           <div className="flex h-14 items-center justify-between px-6">
             <h2 className="font-semibold">Dr. Marine Scientist</h2>
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm"><Bell className="h-4 w-4" /></Button>
+              <ThemeToggle/>
               <Button variant="ghost" size="sm"><Settings className="h-4 w-4" /></Button>
               <Button variant="ghost" size="sm"><LogOut className="h-4 w-4" /></Button>
               <Avatar className="h-8 w-8">
