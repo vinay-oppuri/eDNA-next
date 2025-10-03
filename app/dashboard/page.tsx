@@ -14,6 +14,7 @@ import { UploadDialog } from '@/components/upload/UploadDialog';
 import { Datasets } from '@/components/dashboard/Datasets';
 import { Dataset, View } from '@/types/types';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import Link from 'next/link';
 
 const mockDatasets: Dataset[] = [
   { id: 'ds1', name: 'DeepSea_Pacific_2024', createdAt: new Date('2024-01-15') },
@@ -85,7 +86,7 @@ export default function DashboardPage() {
             <div className="flex items-center space-x-2">
               <ThemeToggle/>
               <Button variant="ghost" size="sm"><Settings className="h-4 w-4" /></Button>
-              <Button variant="ghost" size="sm"><LogOut className="h-4 w-4" /></Button>
+              <Button asChild variant="ghost" size="sm"><Link href='/login'><LogOut className="h-4 w-4" /></Link></Button>
               <Avatar className="h-8 w-8">
                 <div className="w-full h-full flex items-center justify-center bg-primary text-primary-foreground text-sm font-medium">D</div>
               </Avatar>
