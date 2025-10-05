@@ -123,7 +123,7 @@ export function Sidebar({
             />
             {/* User info */}
             <div className="flex-1">
-              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">Vinay Reddy</p>
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">Dr. Marine</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">Data Scientist</p>
             </div>
             {/* Settings / Logout */}
